@@ -1,0 +1,7 @@
+ALL THE FOLLOWING LICENCE APPLIED ON EVERY CONTENT OF THE PROJECT
+
+https://wiki.p2pfoundation.net/Peer_Production_License
+The code is licensed under the Peer Production License, meaning you can use this software provided:
+
+You are a worker-owned business or worker-owned collective
+All financial gain, surplus, profits and benefits produced by the business or collective are distributed among the worker-owners

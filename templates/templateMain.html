@@ -1,0 +1,76 @@
+{% from "macros.html" import nav_link with context %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-compatible">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Agenda des distributions</title>
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/test-schedule-with-Flex.css')}}">
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/loading.css')}}">
+		{% block style %}
+		{% endblock %}
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<img class="navbar-brand" src="{{ url_for('static',filename='img/Logo-jardins-2015_7_flower.png')}}" alt="JEH">
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				    <span class="navbar-toggler-icon"></span>
+				  </button>
+
+		        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		          	<ul class="navbar-nav">
+		            	{{ nav_link('main', 'Agenda') }}
+		            	{{ nav_link('clocking', 'Pointage') }}
+						{{ nav_link('log', 'Journal') }}
+		            	{{ nav_link('summary', 'Recapitulatif') }}
+						<li class="nav-item dropdown">
+							<a id="name" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{name}}</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="{{ url_for('profile') }}">Info profile</a>
+								<a class="dropdown-item" href="{{ url_for('logout') }}">Deconnection</a>
+							</div>
+						</li>
+					</ul>
+		        </div><!-- /.navbar-collapse -->
+    	</nav>
+
+		{% for message in get_flashed_messages() %}
+			<div class="flash">{{ message }}</div>
+		{% endfor %}
+		{% if error %}
+			<p class="error"><strong>Error:</strong> {{ error }}</p>
+		{% endif %}
+
+		{% block content %}
+		{% endblock %}
+
+		<script src="{{ url_for('static',filename='js/lib/jquery.min.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/lib/popper.min.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/lib/bootstrap.min.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/lib/underscore-min.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/lib/backbone-min.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/lib/backbone.localStorage-min.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/lib/backbone.paginator.min.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/lib/moment-with-locales.min.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/lib/mybackbone-bootstrap-modals.js')}}"></script>
+		<script src="{{ url_for('static',filename='js/conf.js') }}"></script>
+		<script src="{{ url_for('static',filename='js/models/slot.js') }}"></script>
+		<script src="{{ url_for('static',filename='js/collections/slots.js') }}"></script>
+		<script src="{{ url_for('static',filename='js/views/common-view.js') }}"></script>
+		{% block scripts %}
+		{% endblock %}
+		<script>
+			const user_name={{name|tojson|safe}}
+			const user_profile={{profile|tojson|safe}}
+			moment.updateLocale('fr', {
+    			relativeTime : Object
+			});
+			$('body').bind('copy paste',function(e) {
+    			e.preventDefault(); return false;
+			});
+		</script>
+	</body>
+
+</html>

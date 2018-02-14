@@ -1,0 +1,22 @@
+{% extends "templateMain.html" %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/backgrid.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/backgrid-paginator.css')}}">
+{% endblock %}
+{% block content %}
+<h1>Recapitulatif</h1>
+
+	<div class="container cbig">
+	</div>
+	<div class="backgrid-paginator"></div>
+	<script type="text/template" id="slot-template"></script>
+	<script type="text/template" id="pagination-view"></script>
+	<script type="text/template" id="chooseListRole-view-template">
+	</script>
+{% endblock %}
+{% block scripts %}
+	<script src="{{ url_for('static',filename='js/lib/backgrid.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/lib/backgrid-paginator.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/views/summary-view.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/appSummary.js')}}"></script>
+{% endblock %}

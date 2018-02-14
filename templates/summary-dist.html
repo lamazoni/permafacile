@@ -1,0 +1,22 @@
+{% extends "templateMain.html" %}
+{% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/backgrid.js/0.3.8/backgrid.min.css" integrity="sha256-XCeOP8VH+7abDBSg+s5SdQC7BcytGH03hWBtyfHUJDM=" crossorigin="anonymous" />
+<link rel="stylesheet" href="{{ url_for('static',filename='css/backgrid-paginator.css')}}">
+{% endblock %}
+{% block content %}
+<h1>Recapitulatif</h1>
+
+	<div class="container cbig">
+	</div>
+	<div class="backgrid-paginator"></div>
+	<script type="text/template" id="slot-template"></script>
+	<script type="text/template" id="pagination-view"></script>
+	<script type="text/template" id="chooseListRole-view-template">
+	</script>
+{% endblock %}
+{% block scripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/backgrid.js/0.3.8/backgrid.min.js" integrity="sha256-Qm0i3gM+f99MFQ/GPmJX4EOD5egx5MF5VU6R0nY3+20=" crossorigin="anonymous"></script>
+	<script src="{{ url_for('static',filename='js/lib/backgrid-paginator.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/views/summary-view.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/appSummary.js')}}"></script>
+{% endblock %}

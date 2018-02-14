@@ -1,0 +1,23 @@
+{% extends "templateMain.html" %}
+{% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/backgrid.js/0.3.8/backgrid.min.css" integrity="sha256-XCeOP8VH+7abDBSg+s5SdQC7BcytGH03hWBtyfHUJDM=" crossorigin="anonymous" />
+<link rel="stylesheet" href="{{ url_for('static',filename='css/backgrid-paginator.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/backgrid-mychange.css')}}">
+{% endblock %}
+{% block content %}
+<h1>Journal</h1>
+
+	<div class="container">
+	</div>
+	<div class="backgrid-paginator"></div>
+	<script type="text/template" id="slot-template"></script>
+	<script type="text/template" id="pagination-view"></script>
+	<script type="text/template" id="chooseListRole-view-template">
+	</script>
+{% endblock %}
+{% block scripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/backgrid.js/0.3.8/backgrid.min.js" integrity="sha256-Qm0i3gM+f99MFQ/GPmJX4EOD5egx5MF5VU6R0nY3+20=" crossorigin="anonymous"></script>
+	<script src="{{ url_for('static',filename='js/lib/backgrid-paginator.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/views/log-view.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/appLog.js')}}"></script>
+{% endblock %}

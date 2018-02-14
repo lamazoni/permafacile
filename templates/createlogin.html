@@ -1,0 +1,27 @@
+{% extends "templateLogin.html" %}
+{% block content %}
+	<div class="login-wrapper">
+		<h2>Creation d un identifiant</h2>
+		<i>quatre lettres minimun pr chaque champ</i>
+		{% from "_formhelper.html" import render_field %}
+		<form method="post">
+			{{ form2.csrf_token }}
+			{% if form2.csrf_token.errors %}
+    			<div class="warning">You have submitted an invalid CSRF token</div>
+			{% endif %}
+			<div>
+				{{render_field(form2.username)}}
+			</div>
+			<div>
+				{{render_field(form2.password) }}
+			</div>
+			<div>
+				{{ render_field(form2.confirm)}}
+			</div>
+			<div>
+				<button	type="submit">creer</button>
+			</div>
+		</form>
+		<p><a href="{{url_for('login')}}">Retourner a la page de connection pour commencer</a></p>
+	</div>
+{% endblock %}

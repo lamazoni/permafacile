@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+		<meta http-equiv="X-UA-compatible">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Distribution JEH</title>
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css')}}">
+	</head>
+	<body>
+		<div class="container">
+			{% for message in get_flashed_messages() %}
+				<div class="flash">{{ message }}</div>
+			{% endfor %}
+			{% if error %}
+				<p class="error"><strong>Error:</strong> {{ error }}</p>
+			{% endif %}
+			{% block content%}
+			{% endblock %}
+		</div>
+	</body>
+</html>

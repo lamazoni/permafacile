@@ -1,0 +1,98 @@
+{% extends "templateMain.html" %}
+{% block style %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/backbone.modal/1.1.5/backbone.modal-min.css" integrity="sha256-vlpFceGdE2tqFW3YBfEItghuTITZhbgqIofDVCbgquE=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/backbone.modal/1.1.5/backbone.modal.theme-min.css" integrity="sha256-tRtQtDOjIlHjmgVgJ/hJm5ugB6E9SpWg6hx/Ce5+AlQ=" crossorigin="anonymous" />
+{% endblock %}
+{% block content %}
+<header>
+	<h2>Bienvenue {{name}}</h2>
+</header>
+<div>
+	<div class="container clittle">
+	</div>
+	<div class="themodal">
+	</div>
+	<div class="paginator">
+	</div>
+
+
+	<script type="text/template" id="chooseListRole-view-template">
+		<div class="modal-body">
+		   <p>Sous quel role souhaitez vous participer ?</p>
+		   <ul class="roleListe">
+				<% _.each( roles , function(role) { %>
+					<li>
+						<button class="btn roleChoose"><%- role %>
+						</button>
+					</li>
+				<% }); %>
+		   </ul>
+		</div>
+		   <div class="modal-footer">
+		   <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Annuler</button>
+		</div>
+	</script>
+
+	<script type="text/template" id="slot-template">
+		<div class="box <%- appearance %>" >
+			  <h2 class="date"><%- date %>
+				  <% if (lock) { %>
+					  <img class="globallock" src="{{ url_for('static',filename='img/lock-locked.svg')}}" alt="lock">
+				  <% } %>
+			  </h2>
+			  <% _.each( roles, function(role) { %>
+					  <ul><%- role %>
+						<% if (attendersByRole.hasOwnProperty(role) ) { %>
+							<% _.each(attendersByRole[role], function(name) { %>
+								<li><%- name %>
+								  <% if (lockCancelAttender) { %>
+									  <img class="littlelock" src="{{ url_for('static',filename='img/lock-locked.svg')}}" alt="lock">
+								  <% } %>
+								</li>
+							<% }); %>
+						<% } %>
+					  </ul>
+			  <% }); %>
+			  <% if ( showbuttons ) { %>
+			  <div class="interaction">
+				<% if ( imPresent ) { %>
+					<button type="button" class="cancel">Annuler</button>
+				<% } %>
+				<% if ( icanAttend ) { %>
+					<button type="button" class="attend">Participer</button>
+				<% } %>
+			  </div>
+			  <% } %>
+		</div>
+	</script>
+	<script type="text/template" id="pagination-view">
+		<ul class="pagination">
+		  <% if (currentPage != 1) { %>
+			<li class="page-item"><a href="#" class="page-link first"><<</a></li>
+		  <% } else { %>
+			<li class="page-item disabled"><a href="#" class="page-link first" tabindex="-1"><<</a></li>
+		  <% } %>
+		  <% if (currentPage != 1) { %>
+			<li class="page-item"><a href="#" class="page-link prev"><</a></li>
+		  <% } else { %>
+			<li class="page-item disabled"><a href="#" class="page-link prev" tabindex="-1"><</a></li>
+		  <% } %>
+		  <% if (lastPage != currentPage && lastPage != 0) { %>
+			<li class="page-item"><a href="#" class="page-link next">></a></li>
+		  <% } else { %>
+			<li class="page-item disabled"><a href="#" class="page-link next" tabindex="-1">></a></li>
+		  <% } %>
+		  <% if (lastPage != currentPage && lastPage != 0) { %>
+			<li class="page-item"><a href="#" class="page-link last">>></a></li>
+		  <% } else { %>
+			<li class="page-item disabled"><a href="#" class="page-link last" tabindex="-1">>></a></li>
+		  <% } %>
+		</ul>
+	  </script>
+  </div>
+
+{% endblock %}
+{% block scripts %}
+	<script src="{{ url_for('static',filename='js/views/agenda-view.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/appAgenda.js')}}"></script>
+{% endblock %}

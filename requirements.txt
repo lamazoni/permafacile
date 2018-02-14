@@ -1,0 +1,15 @@
+click==6.7
+dictdiffer==0.6.1
+Flask==0.12.2
+Flask-SQLAlchemy-Session==1.1
+gunicorn==19.7.1
+itsdangerous==0.24
+Jinja2==2.9.6
+json-delta==2.0
+jsonpickle==0.9.5
+MarkupSafe==1.0
+marshmallow==2.13.6
+psycopg2==2.7.3.1
+SQLAlchemy==1.2.1
+Werkzeug==0.12.2
+WTForms==2.1

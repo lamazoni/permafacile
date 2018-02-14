@@ -1,0 +1,132 @@
+{% extends "templateMain.html" %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style-switch.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/clocking.css')}}">
+{% endblock %}
+{% block content %}
+<h1>Qui a participe ?</h1>
+	<div>
+        <div class="container cbig">
+		</div>
+		<div class="other">
+		</div>
+		<div class="paginator">
+		</div>
+
+		<script type="text/template" id="potentialAttenders-view">
+			<div class="modal-body">
+				<% if ( error ) { %>
+					<p>
+						Une erreur et survenue, ressayez ou/et contacter votre administrateur.
+					</p>
+				<% } else { %>
+			          <p class="attenderListe">Clickez sur un identifiant :</p>
+					  <% if ( loading ) { %>
+						  <div class="loading"></div>
+					  <% } else { %>
+	    				  <ul>
+		    				<% _.each( potentialAttenders, function(value) { %>
+		    					<li class="attendername"> <%- value['name'] %> </li>
+		    				<% });%>
+	    				  </ul>
+					  <% } %>
+					  <p>Selection:<span class="nameChoosen"></span></p>
+				<% } %>
+			 </div>
+			 <div class="modal-footer">
+				 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Annuler</button>
+				 <button id="full-modal-apply-btn" class="btn btn-primary" data-dismiss="modal">Choisir</button>
+			 </div>
+		</script>
+
+		<script type="text/template" id="clocking-view-checkingList">
+			<div class="bigbox <%- appearance %>">
+	            <h2 class="date"><%- date %>
+					<% if (lock) { %>
+						<img class="globallock" src="{{ url_for('static',filename='img/lock-locked.svg')}}" alt="lock">
+					<% } else { %>
+						<img class="globallock" src="{{ url_for('static',filename='img/lock-unlocked.svg')}}" alt="unlock">
+					<% } %>
+				</h2>
+	            <ul class="majors">
+					  <% _.each( people, function(value) { %>
+						<% if ( ! lock ) { %>
+							<% if ( value.checked ) { %>
+								<li><%- value.role %> : <%- value.name %>
+								<% if ( value.role != "accueil-pointage") { %>
+									<div class="complicated-switch" clickedguy="<%- value.name %>" id="<%- value.id %>">
+										<span class="on">oui</span>
+										<span class="off">non</span>
+									</div>
+								<% } %>
+								</li>
+							<% } else { %>
+								<li><%- value.role %> : <%- value.name %>
+								<% if ( value.role != "accueil-pointage") { %>
+									<div class="complicated-switch active" clickedguy="<%- value.name %>" id="<%- value.id %>">
+										<span class="on">oui</span>
+										<span class="off">non</span>
+									</div>
+								<% } %>
+								</li>
+							<% } %>
+						<% } else { %>
+							<li><%- value.role %> : <%- value.name %>
+						<% } %>
+					  <% }); %>
+	            </ul>
+				<% if ( ! lock) { %>
+					<div class="putright">
+						<button type="submit" class="sendbutton btn btn-primary">Envoyer</button>
+					</div>
+					<button type="submit" class="displayChooseAttender btn btn-primary" >Ajouter un participant</button>
+				<% } %>
+			</div>
+		</script>
+		<script type="text/template" id="clocking-view">
+			<div>
+				<div class="checkingList" >
+
+		        </div>
+				<div class="attenderList">
+				</div>
+			</div>
+		</script>
+
+
+		<script type="text/template" id="pagination-view">
+		    <ul class="pagination">
+		      <% if (currentPage != 1) { %>
+		        <li class="page-item"><a href="#" class="page-link first"><<</a></li>
+		      <% } else { %>
+		        <li class="page-item disabled"><a href="#" class="page-link first" tabindex="-1"><<</a></li>
+		      <% } %>
+		      <% if (currentPage != 1) { %>
+		        <li class="page-item"><a href="#" class="page-link prev"><</a></li>
+		      <% } else { %>
+		        <li class="page-item disabled"><a href="#" class="page-link prev" tabindex="-1"><</a></li>
+		      <% } %>
+		      <% if (lastPage != currentPage && lastPage != 0) { %>
+		        <li class="page-item"><a href="#" class="page-link next">></a></li>
+		      <% } else { %>
+		        <li class="page-item disabled"><a href="#" class="page-link next" tabindex="-1">></a></li>
+		      <% } %>
+		      <% if (lastPage != currentPage && lastPage != 0) { %>
+		        <li class="page-item"><a href="#" class="page-link last">>></a></li>
+		      <% } else { %>
+		        <li class="page-item disabled"><a href="#" class="page-link last" tabindex="-1">>></a></li>
+		      <% } %>
+		    </ul>
+		</script>
+
+		<script type="text/template" id="slot-template">
+		</script>
+		<script type="text/template" id="chooseListRole-view-template">
+		</script>
+	</div>
+{% endblock %}
+{% block scripts %}
+	<script src="{{ url_for('static',filename='js/models/attenders.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/views/clocking-view.js')}}"></script>
+	<script src="{{ url_for('static',filename='js/appClocking.js')}}"></script>
+{% endblock %}

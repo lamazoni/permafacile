@@ -1,0 +1,17 @@
+
+@media (min-width: 600px) {
+	.backgrid th,
+	.backgrid td {
+	  display: none;
+	  height: 20px;
+	  max-width: inherit;
+	  padding: 4px 5px;
+	  overflow: hidden;
+	  line-height: 20px;
+	  text-align: left;
+	  text-overflow: ellipsis;
+	  white-space: nowrap;
+	  vertical-align: middle;
+	  border-bottom: 1px solid #DDD;
+	}
+}
