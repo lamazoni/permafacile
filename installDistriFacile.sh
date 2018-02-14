@@ -3,7 +3,7 @@
 # Installation script, provide for convinience purpose only (bug may occur)
 #
 # PLZ BE ROOT TO EXECUTE THE SCRIPT
-set -x
+#set -x
 
 # TODO: use gosu
 #----------------------------------------
@@ -91,7 +91,8 @@ done
 [ ! -z ${VERSION} ] && entries["folder"]="agendaV${VERSION}"
 check_root
 [ $(cat /etc/passwd  | grep ${entries["user"]} | wc -l) -ne 1 ] && echo "username not found" && exit 1
-[ $(ip addr sh | grep inet | grep ${entries["ipandport"]} | wc -l) -ne 1 ] && echo "error ip interface not found" && exit 1
+iponly=$( echo ${entries["ipandport"]} | sed s~:[0-9]*~~ )
+[ $(ip addr sh | grep inet | grep ${iponly} | wc -l) -ne 1 ] && echo "error ip interface not found" && exit 1
 
 if [ ! -z ${VERSION} ] ; then
 	[ -d ${entries["folder"]} ] && echo clean space first && exit 1
